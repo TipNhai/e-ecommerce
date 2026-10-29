@@ -31,3 +31,10 @@ build/
 
 ### VS Code ###
 .vscode/
+# Bỏ qua tất cả thư mục .agents ở mọi cấp thư mục
+.agents/
+**/.agents/
+
+# Bỏ qua tất cả các file markdown (.md)
+*.md
+**/*.md
