@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{email/layout :: mainLayout(~{::title}, ~{::#email-content})}">
+<head>
+    <title th:fragment="title">Chào mừng bạn đến với ShopSmart!</title>
+</head>
+<body>
+
+<div id="email-content">
+
+    <!-- Greeting & Welcome Banner -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td>
+                <div style="background-color: #fff7ed; border: 1px solid #ffedd5; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: center;">
+                    <span style="font-size: 32px;">🎉</span>
+                    <h2 style="margin: 8px 0 4px 0; color: #ea580c; font-size: 20px; font-weight: 700;">Chào mừng bạn gia nhập ShopSmart!</h2>
+                    <p style="margin: 0; color: #9a3412; font-size: 14px;">Tài khoản của bạn đã được khởi tạo thành công và sẵn sàng hoạt động.</p>
+                </div>
+
+                <p style="color: #334155; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+                    Xin chào <strong th:text="${fullName != null ? fullName : 'Quý khách'}" style="color: #0f172a;">Típ Nguyễn</strong>,
+                </p>
+                <p style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0 0 24px 0;">
+                    Cảm ơn bạn đã tin tưởng lựa chọn nền tảng của chúng tôi. Tại ShopSmart, bạn có thể dễ dàng khám phá hàng ngàn sản phẩm công nghệ, thời trang và gia dụng chính hãng với mức giá ưu đãi nhất mỗi ngày.
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <!-- 3 Quick Start Steps (Style TikTok / Notion) -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 28px;">
+        <tr>
+            <td style="padding: 20px 24px;">
+                <h3 style="margin: 0 0 16px 0; font-size: 15px; color: #0f172a; font-weight: 700;">🚀 3 Bước Khởi Đầu Trải Nghiệm Mua Sắm:</h3>
+                
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td width="32" valign="top" style="padding-bottom: 12px;">
+                            <div style="width: 24px; height: 24px; background-color: #ea580c; color: #ffffff; border-radius: 50%; text-align: center; font-size: 12px; font-weight: 700; line-height: 24px;">1</div>
+                        </td>
+                        <td style="padding-bottom: 12px; padding-left: 8px;">
+                            <strong style="color: #1e293b; font-size: 14px;">Cập nhật địa chỉ nhận hàng:</strong>
+                            <p style="margin: 2px 0 0 0; color: #64748b; font-size: 13px;">Thiết lập địa chỉ mặc định để thanh toán 1-chạm cực nhanh.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="32" valign="top" style="padding-bottom: 12px;">
+                            <div style="width: 24px; height: 24px; background-color: #ea580c; color: #ffffff; border-radius: 50%; text-align: center; font-size: 12px; font-weight: 700; line-height: 24px;">2</div>
+                        </td>
+                        <td style="padding-bottom: 12px; padding-left: 8px;">
+                            <strong style="color: #1e293b; font-size: 14px;">Khám phá ưu đãi Flash Sale:</strong>
+                            <p style="margin: 2px 0 0 0; color: #64748b; font-size: 13px;">Săn deal giảm tới 50% vào các khung giờ vàng 0h - 12h - 20h.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="32" valign="top">
+                            <div style="width: 24px; height: 24px; background-color: #ea580c; color: #ffffff; border-radius: 50%; text-align: center; font-size: 12px; font-weight: 700; line-height: 24px;">3</div>
+                        </td>
+                        <td style="padding-left: 8px;">
+                            <strong style="color: #1e293b; font-size: 14px;">Bảo mật tài khoản 2 lớp:</strong>
+                            <p style="margin: 2px 0 0 0; color: #64748b; font-size: 13px;">Kích hoạt bảo vệ tài khoản và nhận thông báo biến động đơn hàng.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Welcome Gift Voucher Card (Style Shopee) -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 28px;">
+        <tr>
+            <td style="background-color: #fffbeb; border: 2px dashed #f59e0b; border-radius: 12px; padding: 20px; text-align: center;">
+                <span style="font-size: 12px; font-weight: 700; color: #b45309; text-transform: uppercase; letter-spacing: 1px;">🎁 Quà Tặng Độc Quyền Cho Thành Viên Mới</span>
+                <div style="margin: 12px 0 6px 0;">
+                    <span style="display: inline-block; background-color: #ffffff; border: 1px solid #fcd34d; border-radius: 8px; padding: 8px 24px; font-size: 22px; font-weight: 800; color: #b45309; letter-spacing: 4px; font-family: monospace;">WELCOME50</span>
+                </div>
+                <p style="margin: 0; color: #78350f; font-size: 13px;">Giảm ngay <strong>50.000 VNĐ</strong> cho đơn hàng đầu tiên từ 200.000 VNĐ. Có giá trị trong 30 ngày.</p>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Primary Call to Action Button -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 24px;">
+        <tr>
+            <td align="center">
+                <a th:href="${shopUrl != null ? shopUrl : 'http://localhost:3000'}"
+                   style="display: inline-block; background: linear-gradient(135deg, #ea580c 0%, #f97316 100%); color: #ffffff; text-decoration: none; font-size: 15px; font-weight: 700; padding: 14px 36px; border-radius: 50px; box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35); text-align: center;">
+                    Bắt Đầu Mua Sắm Ngay →
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <p style="color: #64748b; font-size: 13px; line-height: 1.5; margin: 0; text-align: center;">
+        Nếu bạn cần hỗ trợ, đừng ngần ngại phản hồi trực tiếp email này hoặc liên hệ hotline <strong style="color: #0f172a;">1900 1234</strong>.
+    </p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /e-commerce
+
+spring:
+  datasource:
+    url: ${DBMS_CONNECTION:jdbc:mysql://localhost:3306/ecommerce}
+    username: ${DBMS_USERNAME:root}
+    password: ${DBMS_PASSWORD:root}
+    driverClassName: "com.mysql.cj.jdbc.Driver"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: tipnhai74@gmail.com
+    password: kzbs ozqi otee wksv
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+    properties:
+      spring.json.trusted.packages: "*"
+
+payment:
+  vnpay:
+    url: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+    return-url: http://localhost:8080/api/v1/payments/callback/VNPAY
+    tmn-code: CGXZLS0Z # Mã định danh website (Merchant ID) hiện chỉ dùng miễn phí
+    secret-key: XNBCJFAKAZQSGTARRLGCHVZWCIOIGSHN # Chuỗi bí mật tạo chữ ký
+    version: 2.1.0
+    command: pay
+  momo:
+    endpoint: https://test-payment.momo.vn/v2/gateway/api/create
+    partner-code: MOMO # Mã đối tác MoMo cung cấp
+    access-key: F8BBA842ECF85
+    secret-key: K951B6PE1waDMi640xX08PD3vg6EkVlz
+    return-url: http://localhost:8080/api/v1/payments/callback/MOMO
+    ipn-url: http://localhost:8080/api/v1/payments/callback/MOMO
+    request-type: captureWallet # Thanh toán QR / Ví MoMo
+
+
+jwt:
+  access-key : "1TjXchw5FloESb63Kc+DFhTARvpWL4jUGCwfGWxuG5SIf/1y/LgJxHnMqaF6A/ij"
+  refresh-key : "3jE7sL);)2][tAEFr?xU1u1dW!+EYp&.k]45zq}M)%LqvE!w]&-Vp-AQG,pv9*}W"
+  access-duration : 1800 # 30p
+  refresh-duration : 604800 # 7day
+  remaining-Time : 180
+
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME:n30ygbys}
+  api-key: ${CLOUDINARY_API_KEY:483367921443364}
+  api-secret: ${CLOUDINARY_API_SECRET:hRAJKGmSyMqzDZJaz-aMHdKJF6I}

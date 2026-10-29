@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{email/layout :: mainLayout(~{::title}, ~{::#email-content})}">
+<head>
+    <title th:fragment="title" th:text="'Xác nhận đơn hàng #' + ${orderCode}">Xác nhận đơn hàng</title>
+</head>
+<body>
+
+<div id="email-content">
+
+    <!-- Status Header Card (Style Shopee) -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td style="background-color: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 24px;">
+                <span style="font-size: 32px;">✅</span>
+                <h2 style="margin: 8px 0 4px 0; color: #047857; font-size: 20px; font-weight: 700;">Đặt Hàng Thành Công!</h2>
+                <p style="margin: 0; color: #065f46; font-size: 14px;">
+                    Mã đơn hàng: <strong th:text="${orderCode}" style="font-family: monospace; font-size: 15px; color: #047857;">#ORD-999888</strong>
+                </p>
+            </td>
+        </tr>
+    </table>
+
+    <div style="height: 20px;"></div>
+
+    <!-- Greeting Text -->
+    <p style="color: #334155; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+        Xin chào <strong th:text="${recipientName != null ? recipientName : (customerName != null ? customerName : 'Quý khách')}" style="color: #0f172a;">Típ Nguyễn</strong>,
+    </p>
+    <p style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0 0 24px 0;">
+        Đơn hàng của bạn đã được tiếp nhận và người bán đang chuẩn bị đóng gói để bàn giao cho đơn vị vận chuyển. Thông tin chi tiết đơn hàng như sau:
+    </p>
+
+    <!-- Shipping & Payment Information Card -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 24px;">
+        <tr>
+            <td style="padding: 20px;">
+                <h3 style="margin: 0 0 14px 0; font-size: 14px; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">📍 Thông Tin Giao Nhận & Thanh Toán</h3>
+                
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td width="30%" valign="top" style="color: #64748b; font-size: 13px; padding-bottom: 8px;">Người nhận:</td>
+                        <td width="70%" style="color: #1e293b; font-size: 13px; font-weight: 600; padding-bottom: 8px;" th:text="${recipientName != null ? recipientName : customerName}">Nguyễn Văn A</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="color: #64748b; font-size: 13px; padding-bottom: 8px;">Số điện thoại:</td>
+                        <td style="color: #1e293b; font-size: 13px; font-weight: 600; padding-bottom: 8px;" th:text="${recipientPhone != null ? recipientPhone : 'Chưa cập nhật'}">0901 234 567</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="color: #64748b; font-size: 13px; padding-bottom: 8px;">Địa chỉ nhận:</td>
+                        <td style="color: #1e293b; font-size: 13px; line-height: 1.4; padding-bottom: 8px;" th:text="${shippingAddress != null ? shippingAddress : 'Tại cửa hàng'}">Số 123 Đường Công Nghệ, Phường 1, Quận 1, TP. HCM</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="color: #64748b; font-size: 13px;">Phương thức:</td>
+                        <td style="color: #0284c7; font-size: 13px; font-weight: 700;" th:text="${paymentMethod != null ? paymentMethod : 'Thanh toán khi nhận hàng (COD)'}">COD</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Order Items List (Table Format) -->
+    <h3 style="margin: 0 0 12px 0; font-size: 14px; color: #0f172a; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">📦 Kiện Hàng Của Bạn</h3>
+    
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; margin-bottom: 24px;">
+        <thead style="background-color: #f1f5f9;">
+            <tr>
+                <th align="left" style="padding: 12px 16px; color: #475569; font-size: 12px; font-weight: 600; text-transform: uppercase;">Sản phẩm</th>
+                <th align="center" style="padding: 12px 8px; color: #475569; font-size: 12px; font-weight: 600; text-transform: uppercase;">SL</th>
+                <th align="right" style="padding: 12px 16px; color: #475569; font-size: 12px; font-weight: 600; text-transform: uppercase;">Giá</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Trường hợp có danh sách items thực tế -->
+            <tr th:if="${items != null and !items.empty}" th:each="item, stat : ${items}" style="border-top: 1px solid #f1f5f9;">
+                <td style="padding: 14px 16px;">
+                    <strong style="color: #1e293b; font-size: 13px; display: block;" th:text="${item.productName}">Tên sản phẩm</strong>
+                </td>
+                <td align="center" style="padding: 14px 8px; color: #64748b; font-size: 13px;" th:text="${item.quantity}">1</td>
+                <td align="right" style="padding: 14px 16px; color: #0f172a; font-size: 13px; font-weight: 600;" th:text="${#numbers.formatDecimal(item.price, 0, 'POINT', 0, 'COMMA')} + ' đ'">100.000 đ</td>
+            </tr>
+
+            <!-- Trường hợp fallback nếu đơn hàng chỉ truyền summary -->
+            <tr th:if="${items == null or items.empty}" style="border-top: 1px solid #f1f5f9;">
+                <td style="padding: 14px 16px;">
+                    <strong style="color: #1e293b; font-size: 13px; display: block;">Các mặt hàng theo đơn hàng #<span th:text="${orderCode}">ORD</span></strong>
+                    <span style="color: #94a3b8; font-size: 12px;">Chi tiết sản phẩm đã được lưu trong hệ thống</span>
+                </td>
+                <td align="center" style="padding: 14px 8px; color: #64748b; font-size: 13px;">1</td>
+                <td align="right" style="padding: 14px 16px; color: #0f172a; font-size: 13px; font-weight: 600;" th:text="${#numbers.formatDecimal(finalAmount, 0, 'POINT', 0, 'COMMA')} + ' đ'">250.000 đ</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Order Financial Summary -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f8fafc; border-radius: 12px; padding: 16px 20px; margin-bottom: 28px;">
+        <tr>
+            <td style="color: #64748b; font-size: 13px; padding-bottom: 6px;">Tạm tính:</td>
+            <td align="right" style="color: #1e293b; font-size: 13px; padding-bottom: 6px;" th:text="${subtotal != null ? #numbers.formatDecimal(subtotal, 0, 'POINT', 0, 'COMMA') + ' đ' : #numbers.formatDecimal(finalAmount, 0, 'POINT', 0, 'COMMA') + ' đ'}">250.000 đ</td>
+        </tr>
+        <tr>
+            <td style="color: #64748b; font-size: 13px; padding-bottom: 6px;">Giảm giá Voucher:</td>
+            <td align="right" style="color: #16a34a; font-size: 13px; font-weight: 600; padding-bottom: 6px;" th:text="${discountAmount != null and discountAmount > 0 ? '-' + #numbers.formatDecimal(discountAmount, 0, 'POINT', 0, 'COMMA') + ' đ' : '0 đ'}">0 đ</td>
+        </tr>
+        <tr>
+            <td style="color: #64748b; font-size: 13px; padding-bottom: 12px; border-bottom: 1px dashed #cbd5e1;">Phí vận chuyển:</td>
+            <td align="right" style="color: #16a34a; font-size: 13px; font-weight: 600; padding-bottom: 12px; border-bottom: 1px dashed #cbd5e1;">MIỄN PHÍ</td>
+        </tr>
+        <tr>
+            <td style="color: #0f172a; font-size: 15px; font-weight: 700; padding-top: 12px;">TỔNG THANH TOÁN:</td>
+            <td align="right" style="color: #ea580c; font-size: 20px; font-weight: 800; padding-top: 12px;" th:text="${#numbers.formatDecimal(finalAmount, 0, 'POINT', 0, 'COMMA')} + ' đ'">250.000 đ</td>
+        </tr>
+    </table>
+
+    <!-- Call To Action Button -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-bottom: 20px;">
+        <tr>
+            <td align="center">
+                <a th:href="${trackingUrl != null ? trackingUrl : 'http://localhost:3000/orders/' + orderId}"
+                   style="display: inline-block; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 700; padding: 14px 36px; border-radius: 50px; box-shadow: 0 4px 14px rgba(15, 23, 42, 0.25); text-align: center;">
+                    🔍 Theo Dõi Chi Tiết Đơn Hàng →
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <p style="color: #94a3b8; font-size: 12px; line-height: 1.5; margin: 0; text-align: center;">
+        Lưu ý: Bạn có quyền đồng kiểm tra hàng khi nhận hàng. Nếu có bất kỳ thắc mắc nào, vui lòng liên hệ bộ phận hỗ trợ khách hàng.
+    </p>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="mainLayout(title, content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title th:replace="${title}">E-Commerce Notification</title>
+    <style type="text/css">
+        /* Client-specific Resets */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 600px) {
+            .email-container { width: 100% !important; margin: auto !important; }
+            .fluid-cell { display: block !important; width: 100% !important; box-sizing: border-box !important; }
+            .mobile-padding { padding-left: 20px !important; padding-right: 20px !important; }
+            .mobile-center { text-align: center !important; }
+            .stack-column { display: block !important; width: 100% !important; max-width: 100% !important; direction: ltr !important; }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f1f5f9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+    <!-- Wrapper Table (Full Width Background) -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #f1f5f9; table-layout: fixed;">
+        <tr>
+            <td align="center" style="padding: 30px 10px 40px 10px;">
+                
+                <!-- Main Email Container (Max 600px) -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" class="email-container" style="max-width: 600px; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);">
+                    
+                    <!-- ================= HEADER SECTION ================= -->
+                    <tr>
+                        <td align="center" style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 32px 24px;">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td align="center">
+                                        <!-- Logo / Brand Badge -->
+                                        <div style="display: inline-block; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 50px; padding: 6px 16px; margin-bottom: 12px;">
+                                            <span style="color: #f97316; font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;">⚡ E-COMMERCE PLATFORM</span>
+                                        </div>
+                                        <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">ShopSmart Ecosystem</h1>
+                                        <p style="margin: 6px 0 0 0; color: #94a3b8; font-size: 13px;">Hệ thống mua sắm trực tuyến thông minh & hiện đại</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- ================= DYNAMIC CONTENT SECTION ================= -->
+                    <tr>
+                        <td style="padding: 36px 32px;" class="mobile-padding">
+                            <!-- Nội dung chi tiết của từng loại email sẽ được bơm vào đây -->
+                            <div th:replace="${content}">
+                                <p style="color: #334155; font-size: 15px; line-height: 1.6;">Nội dung mặc định của email.</p>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- ================= TRUST & VALUE BANNER ================= -->
+                    <tr>
+                        <td style="background-color: #f8fafc; padding: 20px 32px; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+                            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tr>
+                                    <td width="33%" align="center" class="stack-column" style="padding: 6px 0;">
+                                        <span style="font-size: 18px;">🛡️</span>
+                                        <p style="margin: 4px 0 0 0; font-size: 12px; font-weight: 600; color: #475569;">100% Chính Hãng</p>
+                                    </td>
+                                    <td width="33%" align="center" class="stack-column" style="padding: 6px 0;">
+                                        <span style="font-size: 18px;">🚀</span>
+                                        <p style="margin: 4px 0 0 0; font-size: 12px; font-weight: 600; color: #475569;">Giao Hàng Siêu Tốc</p>
+                                    </td>
+                                    <td width="33%" align="center" class="stack-column" style="padding: 6px 0;">
+                                        <span style="font-size: 18px;">🔄</span>
+                                        <p style="margin: 4px 0 0 0; font-size: 12px; font-weight: 600; color: #475569;">Đổi Trả 7 Ngày</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- ================= FOOTER SECTION ================= -->
+                    <tr>
+                        <td align="center" style="background-color: #f8fafc; padding: 28px 24px; color: #64748b; font-size: 12px; line-height: 1.6;">
+                            <p style="margin: 0 0 8px 0; font-weight: 600; color: #334155; font-size: 13px;">ShopSmart E-Commerce Inc.</p>
+                            <p style="margin: 0 0 12px 0;">Tòa nhà Công Nghệ, Khu Công Nghệ Cao, TP. Hồ Chí Minh, Việt Nam</p>
+                            <p style="margin: 0 0 16px 0;">
+                                Hotline: <a href="tel:19001234" style="color: #f97316; text-decoration: none; font-weight: 600;">1900 1234</a> 
+                                &nbsp;|&nbsp; 
+                                Email hỗ trợ: <a href="mailto:support@shopsmart.vn" style="color: #f97316; text-decoration: none;">support@shopsmart.vn</a>
+                            </p>
+                            
+                            <!-- Copyright & CAN-SPAM notes -->
+                            <p style="margin: 0; color: #94a3b8; font-size: 11px;">
+                                © <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy')}">2026</span> ShopSmart. Mọi quyền được bảo lưu.<br>
+                                Bạn nhận được email này vì đã đăng ký tài khoản hoặc mua hàng tại hệ thống của chúng tôi.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+                <!-- End Main Container -->
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>
